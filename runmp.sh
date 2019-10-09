@@ -42,6 +42,7 @@ for dataset in ${DATADIR}/*; do
 
     if [ -z ${expected} ]; then expected=none; fi
 
-    echo "${TARGET} -e ${expected} -i ${inputs} -o ${dataset}/result.raw -t ${TYPE}"
-    ${TARGET} -e ${expected} -i ${inputs} -o ${dataset}/result.raw -t ${TYPE}
+    echo ">> ${TARGET} -e ${expected} -i ${inputs} -o ${dataset}/result.raw -t ${TYPE}"
+    ${TARGET} -e ${expected} -i ${inputs} -o ${dataset}/result.raw -t ${TYPE} |
+        grep -oP --color 'message\"\s*\:\s*\"\s*\K(.*(correct)?.*)(?=\")'
 done
