@@ -11,7 +11,7 @@ if [ ! -x ${TARGET} ]; then
     exit 1
 fi
 
-DATADIR=data/MP${MP}/data
+DATADIR=data/${MP}/data
 
 if [ ! -x ${DATADIR} ]; then
     echo "unable to find directory ${DATADIR}"
@@ -19,17 +19,17 @@ if [ ! -x ${DATADIR} ]; then
 fi
 
 case ${MP} in
-0|1|5)
+0|1|4|5)
     TYPE=vector
     ;;
 2|3)
     TYPE=matrix
     ;;
-4)
+6)
     TYPE=image
     ;;
 *)
-    echo "unknonn type for MP${MP}"
+    echo "unknown type for MP${MP}"
     exit 1
 esac
 

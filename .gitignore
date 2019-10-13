@@ -21,4 +21,4 @@ x64
 *.zip
 
 data
-**/result.res
+**/result.raw
