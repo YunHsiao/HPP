@@ -6,7 +6,7 @@
 #include "device_launch_parameters.h"
 #include <wb.h>
 
-#define BLOCK_SIZE 256 //@@ You can change this
+#define BLOCK_SIZE 512 //@@ You can change this
 #define SECTION_SIZE (BLOCK_SIZE << 1)
 
 #define wbCheck(code) do { GPUAssert(code, __LINE__); } while (0)
@@ -42,36 +42,25 @@ __global__ void scan(float *input, float *output, int len) {
   __shared__ float sums_acc[SECTION_SIZE];
   int blocks = gridDim.x;
   int bid = blockIdx.x;
-  int tid = threadIdx.x << 1;
+  int tid = threadIdx.x;
+  int tid2 = BLOCK_SIZE + tid;
   int i = bid * SECTION_SIZE + tid;
-  if (i < len) {
-    section[tid] = input[i];
-    section[tid + 1] = input[i + 1];
-  } else {
-    section[tid] = 0.0f;
-    section[tid + 1] = 0.0f;
-  }
+  int i2 = BLOCK_SIZE + i;
+  section[tid] = i < len ? input[i] : 0.0f;
+  section[tid2] = i2 < len ? input[i2] : 0.0f;
   __syncthreads();
-  do_scan(section, tid);
-  if (tid == 0) output[bid] = section[SECTION_SIZE - 1];
+  do_scan(section, tid << 1);
+  output[bid] = section[SECTION_SIZE - 1];
   __syncthreads();
   // assumes blocks less than (SECTION_SIZE - 1)
-  if (tid == 0) { // exclusive scan
-    sums_acc[0] = 0.0f;
-    sums_acc[1] = output[0];
-  } else if (tid < blocks) {
-    sums_acc[tid] = output[tid - 1];
-    sums_acc[tid + 1] = output[tid];
-  } // don't care about those outside valid range
+  sums_acc[tid] = sums_acc[tid2] = 0.0f; // exclusive scan
+  if (tid < blocks) sums_acc[tid + 1] = output[tid];
+  if (tid2 < blocks) sums_acc[tid2 + 1] = output[tid2];
   __syncthreads();
-  do_scan(sums_acc, tid);
+  do_scan(sums_acc, tid << 1);
   float acc = sums_acc[bid];
-  if (i < len) {
-    output[i] = section[tid] + acc;
-    output[i + 1] = section[tid + 1] + acc;
-    // output[tid] = sums_acc[tid];
-    // output[tid + 1] = sums_acc[tid + 1];
-  }
+  if (i < len) output[i] = section[tid] + acc;
+  if (i2 < len) output[i2] = section[tid2] + acc;
 }
 
 int main(int argc, char ** argv) {
