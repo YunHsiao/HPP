@@ -42,7 +42,10 @@ for dataset in ${DATADIR}/*; do
 
     if [ -z ${expected} ]; then expected=none; fi
 
-    echo ">> ${TARGET} -e ${expected} -i ${inputs} -o ${dataset}/result.raw -t ${TYPE}"
-    ${TARGET} -e ${expected} -i ${inputs} -o ${dataset}/result.raw -t ${TYPE} |
+    if [ ${TYPE} == "image" ]; then ext=ppm;
+    else ext=raw; fi
+
+    echo ">> ${TARGET} -e ${expected} -i ${inputs} -o ${dataset}/result.${ext} -t ${TYPE}"
+    ${TARGET} -e ${expected} -i ${inputs} -o ${dataset}/result.${ext} -t ${TYPE} |
         grep -oP --color 'message\"\s*\:\s*\"\s*\K(.*(correct)?.*)(?=\")'
 done
