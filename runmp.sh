@@ -19,7 +19,7 @@ if [ ! -x ${DATADIR} ]; then
 fi
 
 case ${MP} in
-0|1|4|5)
+0|1|4|5|12)
     TYPE=vector
     ;;
 2|3)
@@ -27,6 +27,9 @@ case ${MP} in
     ;;
 6)
     TYPE=image
+    ;;
+11)
+    TYPE=histogram
     ;;
 *)
     echo "unknown type for MP${MP}"
