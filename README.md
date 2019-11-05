@@ -1,20 +1,22 @@
 Heterogeneous Parallel Programming Course Assignments
 =====
 
-Based on the original [WebGPU](https://github.com/abduld/WebGPU) website repo,
+Based on the original [WebGPU](https://github.com/abduld/WebGPU) website repo,<br>
 With these necessary adjustments:
 * Rearraged file structure
 * Fixed cmake script
 * Fixed runmp bash script
 * Fixed all markdown links
 
-Basically everything now works as they originally designed to.
+Basically everything now works as they originally designed to.<br>
 There are just enough information here to go through all the assignments comfortably.
 
-To get started, build the cmake project as the following chapters describe.
+To get started, build the cmake project as the following chapters describe.<br>
 Tested only on Windows (Windows 10 1903, VS 2017, CUDA 10.1)
 
-Note that the MPs is offered in an inconsistant(and even fragmented) order with the course material, so it is best to progress in the following order:
+Note that the MPs is offered in an inconsistant(and even fragmented) order with the course material,<br>
+so it is best to progress in the following order:
+
 Week | Assignment | Content
 :--: | :--: | :--
 Week 0 | MP0 | Device Query
@@ -30,8 +32,8 @@ Week 6 | MP12 | Streamed Vector Addition
 libwb
 =====
 
-# Compiling and Running on Linux and Windows
-# by Tran Minh Quan
+## Compiling and Running on Linux and Windows
+### by Tran Minh Quan
 
 This is a tutorial explains how to compile and run your Machine
 Problems (MPs) offline **without separating on building libwb.**
