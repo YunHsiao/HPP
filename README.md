@@ -9,7 +9,8 @@ With these necessary adjustments:
 * Fixed all markdown links
 
 Basically everything now works as they originally designed to.<br>
-There are just enough information here to go through all the assignments comfortably.
+Since the original website has been shutdown for good, everything here is self-contained.<br>
+There are enough informations to go through all the assignments comfortably.
 
 To get started, build the cmake project as the following chapters describe.<br>
 Tested only on Windows (Windows 10 1903, VS 2017, CUDA 10.1)
@@ -21,12 +22,12 @@ Week | Assignment | Content
 :--: | :--: | :--
 Week 0 | MP0 | Device Query
 Week 1 | MP1 | Vector Addition
-Week 1 | MP2 | Matrix Multiplication
-Week 2 | MP3 | Tiled Matrix Multiplication
-Week 3 | MP6 | Tiled Convolution
+Week 1 | MP2 | Basic Matrix-Matrix Multiplication
+Week 2 | MP3 | Tiled Matrix-Matrix Multiplication
+Week 3 | MP6 | Image Convolution
 Week 4 | MP4 | List Reduction
 Week 4 | MP5 | List Scan
-Week 5 | MP11 | Histogramming Equalization
+Week 5 | MP11 | Histogram Equalization
 Week 6 | MP12 | Streamed Vector Addition
 
 libwb

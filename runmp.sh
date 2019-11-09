@@ -25,11 +25,8 @@ case ${MP} in
 2|3)
     TYPE=matrix
     ;;
-6)
+6|11)
     TYPE=image
-    ;;
-11)
-    TYPE=histogram
     ;;
 *)
     echo "unknown type for MP${MP}"

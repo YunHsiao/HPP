@@ -105,7 +105,7 @@ static wbBool wbSolution_correctQ(char *expectedOutputFile, wbSolution_t sol) {
     }
     return res;
   } else if (wbString_sameQ(wbSolution_getType(sol), "histogram")) {
-    return wbSolution_listCorrectQ<unsigned char>(expectedOutputFile, sol,
+    return wbSolution_listCorrectQ<int>(expectedOutputFile, sol,
                                                   "Integer");
   } else if (wbString_sameQ(wbSolution_getType(sol), "integral_vector")) {
     return wbSolution_listCorrectQ<int>(expectedOutputFile, sol, "Integer");
@@ -159,7 +159,7 @@ wbBool wbSolution(char *expectedOutputFile, char *outputFile, char *type0,
                wbString_sameQ(type, "matrix")) {
       wbExport(outputFile, (wbReal_t *)data, rows, columns);
     } else if (wbString_sameQ(type, "histogram")) {
-      wbExport(outputFile, (unsigned char *)data, rows, columns);
+      wbExport(outputFile, (int *)data, rows, columns);
     }
   }
 
