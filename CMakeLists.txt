@@ -7,6 +7,7 @@
 project(libwb)
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
 find_package(CUDA REQUIRED)
+find_package(OpenCL REQUIRED)
 # collect source files
 
 if(CUDA_FOUND)
@@ -61,3 +62,6 @@ add_mp_executable(MP5 skel/mp5.cu)
 add_mp_executable(MP6 skel/mp6.cu)
 add_mp_executable(MP11 skel/mp11.cu)
 add_mp_executable(MP12 skel/mp12.cu)
+
+add_executable(MP7 skel/mp7.cpp ${wbhdr} ${wbsrc})
+target_link_libraries(MP7 OpenCL::OpenCL)
