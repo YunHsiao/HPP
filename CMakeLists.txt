@@ -66,6 +66,10 @@ add_mp_executable(MP12 skel/mp12.cu)
 add_executable(MP7 skel/mp7.cpp ${wbhdr} ${wbsrc})
 target_link_libraries(MP7 OpenCL::OpenCL)
 
+# note C++ AMP doesn't work on x64
+# https://docs.microsoft.com/en-us/cpp/parallel/amp/cpp-amp-overview#system-requirements
+add_executable(MP8 skel/mp8.cpp ${wbhdr} ${wbsrc})
+
 # MSVC doesn't support OpenACC at all
 if(NOT MSVC)
     find_package(OpenACC REQUIRED)

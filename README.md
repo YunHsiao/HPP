@@ -29,6 +29,11 @@ Week 4 | MP4 | List Reduction
 Week 4 | MP5 | List Scan
 Week 5 | MP11 | Histogram Equalization
 Week 6 | MP12 | Streamed Vector Addition
+Week 7 | MP7 | (Optional) OpenCL Vector Addition
+Week 7 | MP9 | (Optional) OpenACC Vector Addition
+Week 8 | MP8 | (Optional) C++ AMP Vector Addition
+
+Reference implementation of all the above assignments can be found at [the `ref` branch](https://github.com/YunHsiao/HPP/tree/ref).
 
 libwb
 =====
