@@ -19,7 +19,7 @@ if [ ! -x ${DATADIR} ]; then
 fi
 
 case ${MP} in
-0|1|4|5|7|12)
+0|1|4|5|7|8|9|12)
     TYPE=vector
     ;;
 2|3)

@@ -5,7 +5,7 @@
 # <email>   quantm@unist.ac.kr  kast.jo@googlemail.com msarahan@gmail.com </email>
 ############################################################################################
 project(libwb)
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.7 FATAL_ERROR)
 find_package(CUDA REQUIRED)
 find_package(OpenCL REQUIRED)
 # collect source files
@@ -65,3 +65,10 @@ add_mp_executable(MP12 skel/mp12.cu)
 
 add_executable(MP7 skel/mp7.cpp ${wbhdr} ${wbsrc})
 target_link_libraries(MP7 OpenCL::OpenCL)
+
+# MSVC doesn't support OpenACC at all
+if(NOT MSVC)
+    find_package(OpenACC REQUIRED)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenACC_CXX_FLAGS}")
+    add_executable(MP9 skel/mp9.cpp ${wbhdr} ${wbsrc})
+endif()
