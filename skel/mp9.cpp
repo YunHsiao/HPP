@@ -1,15 +1,13 @@
 
+#include <openacc.h>
 #include <wb.h>
 
 int main(int argc, char **argv) {
   wbArg_t args;
   int inputLength;
-  float *hostInput1;
-  float *hostInput2;
-  float *hostOutput;
-  float *deviceInput1;
-  float *deviceInput2;
-  float *deviceOutput;
+  float* __restrict hostInput1;
+  float* __restrict hostInput2;
+  float* __restrict hostOutput;
 
   args = wbArg_read(argc, argv);
 
@@ -21,6 +19,12 @@ int main(int argc, char **argv) {
 
   wbLog(TRACE, "The input length is ", inputLength);
 
+  wbTime_start(Compute, "Performing GPU computation");
+  #pragma acc kernels loop copyin(hostInput1[0:inputLength], hostInput2[0:inputLength]), copyout(hostOutput[0:inputLength])
+  for (int i = 0; i < inputLength; i++) {
+    hostOutput[i] = hostInput1[i] + hostInput2[i];
+  }
+  wbTime_stop(Compute, "Performing GPU computation");
 
   wbSolution(args, hostOutput, inputLength);
 
